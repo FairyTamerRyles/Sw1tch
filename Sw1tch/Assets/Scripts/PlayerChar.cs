@@ -14,6 +14,7 @@ public class PlayerChar : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]
     private GameObject reticle;
+    private GameObject sprite;
     private Vector2 moveInput;
     
     public float lerpVar;
@@ -63,6 +64,7 @@ public class PlayerChar : MonoBehaviour
         Vector2 lookDir = mousePos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90;
         reticle.transform.eulerAngles = new Vector3(0, 0, angle);
+        sprite.transform.eulerAngles = new Vector3(0, 0, angle);
     }
 
     void FixedUpdate()
