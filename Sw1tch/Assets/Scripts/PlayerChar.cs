@@ -14,6 +14,7 @@ public class PlayerChar : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]
     private GameObject reticle;
+    [SerializeField]
     private GameObject sprite;
     private Vector2 moveInput;
     
