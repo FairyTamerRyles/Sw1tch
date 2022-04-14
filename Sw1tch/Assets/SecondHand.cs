@@ -10,7 +10,7 @@ public class SecondHand : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("rotateHand", 1.0f, 1.0f);
+        //InvokeRepeating("rotateHand", 1.0f, 1.0f);
     }
 
     // Update is called once per frame
@@ -20,7 +20,6 @@ public class SecondHand : MonoBehaviour
         {
             transform.Rotate(0, 0, -rotationSpeed);
             degreesTurned = degreesTurned - rotationSpeed;
-            Debug.Log(degreesTurned);
             if(degreesTurned <= -30)
             {
                 rotate = false;
