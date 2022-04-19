@@ -15,6 +15,8 @@ public class BasicShot : MonoBehaviour
     private float timer = 0f;
     private InputMaster playerInput;
     private bool isShooting;
+    private bool shotOnce = false;
+    private bool waitingForShot = false;
 
 
 
@@ -26,6 +28,7 @@ public class BasicShot : MonoBehaviour
     void OnDisable()
     {
         playerInput.Disable();
+        StopShoot();
     }
 
     void Awake()
@@ -38,28 +41,20 @@ public class BasicShot : MonoBehaviour
         playerInput.Player.StopFire.performed += context => StopShoot();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
-        if(timer <= 0)
+        if(timer <= 0.1) //timer makes sure you are within firing timeframe
         {
-            Shoot();
+            if(isShooting || waitingForShot) //checks if we are shooting right now, or if we shot, let go, but need to fire once
+            {
+                Shoot();
+            }
         }
         else
         {
             timer -= Time.fixedDeltaTime;
         }
+
     }
     void StartShoot()
     {
@@ -67,15 +62,18 @@ public class BasicShot : MonoBehaviour
     }
     void StopShoot()
     {
-        isShooting = false;
+        if(!waitingForShot)
+        {
+            isShooting = false;
+            shotOnce = false;
+        }
     }
 
     void Shoot()
     {
         timer = fireSpeed;
-        if(isShooting)
-        {
-            Instantiate(projectile, spawnPoint.position, spawnPoint.rotation);
-        }
+        Instantiate(projectile, spawnPoint.position, spawnPoint.rotation);
+        shotOnce = true;
+        waitingForShot = false;
     }
 }

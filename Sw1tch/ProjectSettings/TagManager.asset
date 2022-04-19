@@ -3,18 +3,23 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Boe
+  - Triane
+  - Circe
+  - Warp
+  - WarpPoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Players
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Obsticles
+  - Enemies
+  - Walls
+  - Projectiles
   - 
   - 
   - 
