@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7857970111626294294}
   - component: {fileID: 8960400054800370271}
   - component: {fileID: 2143876012744559937}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet
   m_TagString: Circe
   m_Icon: {fileID: 0}

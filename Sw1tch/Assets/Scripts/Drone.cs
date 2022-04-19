@@ -11,6 +11,7 @@ public class Drone : MonoBehaviour, IDamageable, IEnemy
     public GameObject gameController;
 
     public GameObject currentPlayer;
+    public GameObject bulletSpawn;
 
     public GameObject projectile;
     public float shotIntervalTime;
@@ -18,6 +19,7 @@ public class Drone : MonoBehaviour, IDamageable, IEnemy
 
     public Rigidbody2D rb;
     public float health = 100;
+    public float slowSpeed;
 
 
     public void takeDamage(float damage)
@@ -66,7 +68,23 @@ public class Drone : MonoBehaviour, IDamageable, IEnemy
 
         if(Vector2.Distance(transform.position, currentPlayer.transform.position) > stoppingDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, currentPlayer.transform.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, currentPlayer.transform.position, speed * Time.fixedDeltaTime);
+            float x = rb.velocity.x;
+            float y = rb.velocity.y;
+
+            x -= slowSpeed;
+            y -= slowSpeed;
+
+            if(x < 0)
+            {
+                x = 0;
+            }
+            if(y < 0)
+            {
+                y = 0;
+            }
+
+            rb.velocity = new Vector2(x, y);
         }
         else if(Vector2.Distance(transform.position, currentPlayer.transform.position) <= stoppingDistance && Vector2.Distance(transform.position, currentPlayer.transform.position) > retreatDistance)
         {
@@ -75,11 +93,11 @@ public class Drone : MonoBehaviour, IDamageable, IEnemy
 
         if(shotIntervalTime <= 0)
         {
-            GameObject proj = Instantiate(projectile, transform.position, transform.rotation);
+            GameObject proj = Instantiate(projectile, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
             proj.transform.SetParent(gameObject.transform.parent);
             Rigidbody2D rb = proj.GetComponent<Rigidbody2D>();
             rb.AddForce(transform.up * proj.GetComponent<Projectile>().fireForce, ForceMode2D.Impulse);
-            proj.GetComponent<Projectile>().Invoke("despawn", proj.GetComponent<Projectile>().lifeTime);
+            proj.GetComponent<Projectile>().Invoke("Despawn", proj.GetComponent<Projectile>().lifeTime);
             shotIntervalTime = startShotIntervalTime;
         }
         else

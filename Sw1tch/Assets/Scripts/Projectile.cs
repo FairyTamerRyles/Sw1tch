@@ -15,8 +15,9 @@ public class Projectile : MonoBehaviour
 
     public LayerMask collidableLayers;
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Bullet Collided");
         if(((1<<collision.gameObject.layer) & collidableLayers) != 0)
         {
             Debug.Log("Triggered " + collision.gameObject.name);
@@ -25,7 +26,7 @@ public class Projectile : MonoBehaviour
                 collision.gameObject.GetComponent<IDamageable>().takeDamage(damage);
             }
             //Instantiate(hitEffect, transform.position, Quaternion.identity);*/
-            Destroy(this.gameObject);
+            Despawn();
         }
     }
 
@@ -34,6 +35,7 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         rb.AddForce(transform.up * fireForce, ForceMode2D.Impulse);
+        Invoke("Despawn", lifeTime);
     }
 
     // Update is called once per frame
@@ -46,7 +48,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    void despawn()
+    void Despawn()
     {
         Destroy(this.gameObject);
     }

@@ -17,6 +17,10 @@ public class PlayerChar : MonoBehaviour
     [SerializeField]
     private GameObject sprite;
     private Vector2 moveInput;
+
+    //private IAttack attack;
+    //private IAlt alt;
+    //private IUlt ult;
     
     public float lerpVar;
 

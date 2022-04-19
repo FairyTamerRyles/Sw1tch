@@ -41,18 +41,6 @@ public class BasicShot : MonoBehaviour
         playerInput.Player.StopFire.performed += context => StopShoot();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
         if(timer <= 0.1) //timer makes sure you are within firing timeframe

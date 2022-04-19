@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8731078968319366413}
   - component: {fileID: 2362235486459416160}
   - component: {fileID: 7423678031621207302}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TriangleBullet
   m_TagString: Triane
   m_Icon: {fileID: 0}
