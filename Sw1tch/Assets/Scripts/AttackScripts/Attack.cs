@@ -139,7 +139,7 @@ public abstract class Attack : MonoBehaviour
         Debug.LogWarning("Attack Burst on " + gameObject.name + " does not have an applicable override!");
     }
 
-    void Attack_Range()
+    void Attack_Strong()
     {
         Debug.LogWarning("Attack Range on " + gameObject.name + " does not have an applicable override!");
     }

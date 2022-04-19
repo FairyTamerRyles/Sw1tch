@@ -6,37 +6,33 @@ public class Boe_Attack : Attack
 {
     [SerializeField]
     private Transform leftSpawnPoint, rightSpawnPoint, backSpawnPoint;
+    [SerializeField]
+    private GameObject burstProjectile, spreadProjectile, strongProjectile;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    new public void Attack_Burst()
+    new void Attack_Burst()
     {
         Timer = FireSpeed;
-        Instantiate(Projectile, SpawnPoint.position, SpawnPoint.rotation);
-        Instantiate(Projectile, leftSpawnPoint.position, leftSpawnPoint.rotation);
-        Instantiate(Projectile, rightSpawnPoint.position, rightSpawnPoint.rotation);
-        Instantiate(Projectile, backSpawnPoint.position, backSpawnPoint.rotation);
+        Instantiate(burstProjectile, SpawnPoint.position, SpawnPoint.rotation);
         ShotOnce = true;
         WaitingForShot = false;
     }
 
-    void Attack_Range()
+    new void Attack_Strong()
     {
-        Debug.LogWarning("Attack Range on " + gameObject.name + " does not have an applicable override!");
+        Timer = FireSpeed;
+        Instantiate(burstProjectile, SpawnPoint.position, SpawnPoint.rotation);
+        ShotOnce = true;
+        WaitingForShot = false;
     }
 
-    void Attack_Spread()
+    new void Attack_Spread()
     {
-        Debug.LogWarning("Attack Spread on " + gameObject.name + " does not have an applicable override!");
+        Timer = FireSpeed;
+        Instantiate(Projectile, SpawnPoint.position, SpawnPoint.rotation);
+        Instantiate(spreadProjectile, leftSpawnPoint.position, leftSpawnPoint.rotation);
+        Instantiate(spreadProjectile, rightSpawnPoint.position, rightSpawnPoint.rotation);
+        Instantiate(spreadProjectile, backSpawnPoint.position, backSpawnPoint.rotation);
+        ShotOnce = true;
+        WaitingForShot = false;
     }
 }
