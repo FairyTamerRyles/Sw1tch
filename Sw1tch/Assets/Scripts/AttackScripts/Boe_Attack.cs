@@ -9,7 +9,7 @@ public class Boe_Attack : Attack
     [SerializeField]
     private GameObject burstProjectile, spreadProjectile, strongProjectile;
 
-    new void Attack_Burst()
+    void Attack_Burst()
     {
         Timer = FireSpeed;
         Instantiate(burstProjectile, SpawnPoint.position, SpawnPoint.rotation);
@@ -17,15 +17,15 @@ public class Boe_Attack : Attack
         WaitingForShot = false;
     }
 
-    new void Attack_Strong()
+    void Attack_Strong()
     {
         Timer = FireSpeed;
-        Instantiate(burstProjectile, SpawnPoint.position, SpawnPoint.rotation);
+        Instantiate(strongProjectile, SpawnPoint.position, SpawnPoint.rotation);
         ShotOnce = true;
         WaitingForShot = false;
     }
 
-    new void Attack_Spread()
+    void Attack_Spread()
     {
         Timer = FireSpeed;
         Instantiate(Projectile, SpawnPoint.position, SpawnPoint.rotation);

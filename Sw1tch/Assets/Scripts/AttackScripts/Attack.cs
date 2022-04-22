@@ -21,6 +21,8 @@ public abstract class Attack : MonoBehaviour
 
     private float timer = 0f;
     private InputMaster playerInput;
+    [SerializeField]
+    private Camera cam;
     private bool isShooting;
     private bool shotOnce = false;
     private bool waitingForShot = false;
@@ -89,7 +91,7 @@ public abstract class Attack : MonoBehaviour
     {
         if(timer <= 0.1) //timer makes sure you are within firing timeframe
         {
-            if(isShooting || waitingForShot) //checks if we are shooting right now, or if we shot, let go, but need to fire once
+            if(isShooting) //checks if we are shooting right now, or if we shot, let go, but need to fire once
             {
                 Shoot(upgradeTag);
             }
@@ -102,6 +104,11 @@ public abstract class Attack : MonoBehaviour
     }
     void StartShoot()
     {
+        if(timer <= 0.12)
+        {
+            //timer = fireSpeed;
+            Shoot(upgradeTag);
+        }
         isShooting = true;
     }
     void StopShoot()
@@ -129,12 +136,12 @@ public abstract class Attack : MonoBehaviour
     void Attack_Basic()
     {
         timer = fireSpeed;
-        Instantiate(projectile, spawnPoint.position, spawnPoint.rotation);
+        GameObject proj = Instantiate(projectile, spawnPoint.position, spawnPoint.rotation);
         shotOnce = true;
-        waitingForShot = false;
+        //waitingForShot = false;
     }
 
-    public void Attack_Burst()
+    void Attack_Burst()
     {
         Debug.LogWarning("Attack Burst on " + gameObject.name + " does not have an applicable override!");
     }

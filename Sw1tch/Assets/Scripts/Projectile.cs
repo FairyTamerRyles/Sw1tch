@@ -14,6 +14,9 @@ public class Projectile : MonoBehaviour
     private float timer = 0;
 
     public LayerMask collidableLayers;
+    [SerializeField]
+    private string playerName;
+    private Vector2 playerVelocity;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -34,6 +37,8 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerVelocity = GameObject.Find(playerName).GetComponent<Rigidbody2D>().velocity;
+        rb.AddForce(playerVelocity, ForceMode2D.Impulse);
         rb.AddForce(transform.up * fireForce, ForceMode2D.Impulse);
         Invoke("Despawn", lifeTime);
     }
@@ -42,10 +47,11 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if(timer >= lifeTime && !damaging)
-        {
-            //despawn();
-        }
+    }
+
+    void fixedUpdate()
+    {
+        //Vector2.Lerp(target, rb.velocity, 1);
     }
 
     void Despawn()

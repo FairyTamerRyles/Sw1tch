@@ -7,7 +7,22 @@ using Cinemachine;
 public class CameraController : MonoBehaviour
 {
     public CinemachineVirtualCamera vCam;
-    public void switchCameraTarget(GameObject newTarget)
+
+    public static CameraController Instance { get; private set; }
+
+    void Awake ()
+    {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    public void SwitchCameraTarget(GameObject newTarget)
     {
         vCam.Follow = newTarget.transform;
     }

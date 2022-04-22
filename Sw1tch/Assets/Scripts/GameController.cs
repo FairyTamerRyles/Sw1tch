@@ -117,7 +117,7 @@ public class GameController : MonoBehaviour
                     trian.GetComponent<PlayerChar>().switchOdds = 1;
                     boe.GetComponent<PlayerChar>().switchOdds++;
                 }
-                camController.switchCameraTarget(newCurrentPlayer);
+                CameraController.Instance.SwitchCameraTarget(newCurrentPlayer);
                 currentPlayer = newCurrentPlayer;
 
                 //activeEnemiesTargetPlayer();
