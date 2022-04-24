@@ -9,6 +9,7 @@ TagManager:
   - Circe
   - Warp
   - WarpPoint
+  - Connector
   layers:
   - Default
   - TransparentFX

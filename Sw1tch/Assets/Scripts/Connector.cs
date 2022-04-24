@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Connector : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private Vector2 directionToTravel;
+    [SerializeField]
+    private Room connectedRoom;
 
-    // Update is called once per frame
-    void Update()
+    public Vector2 DirectionToTravel
     {
-        
+        get { return directionToTravel; }
+    }
+    public Room ConnectedRoom
+    {
+        get { return connectedRoom; }
     }
 }
