@@ -21,10 +21,11 @@ public class GameController : MonoBehaviour
     private CameraController camController;
     [SerializeField]
     private bool paused = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        //InvokeRepeating("randomlyChangePlayer", 5.0f, 5.0f);
+        InvokeRepeating("randomlyChangePlayer", 5.0f, 5.0f);
         liveCharacters.Add(circe);
         liveCharacters.Add(boe);
         liveCharacters.Add(trian);
@@ -117,7 +118,7 @@ public class GameController : MonoBehaviour
                     trian.GetComponent<PlayerChar>().switchOdds = 1;
                     boe.GetComponent<PlayerChar>().switchOdds++;
                 }
-                CameraController.Instance.SwitchCameraTarget(newCurrentPlayer);
+                CameraController.Instance.SwitchCameraTarget(newCurrentPlayer, currentPlayer.transform.parent.GetComponent<Room>());
                 currentPlayer = newCurrentPlayer;
 
                 //activeEnemiesTargetPlayer();
