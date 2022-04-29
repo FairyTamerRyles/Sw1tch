@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireForce: 80
   rb: {fileID: 4447001528080474942}
-  lifeTime: 0.4
+  lifeTime: 0.6
   damaging: 0
   collidableLayers:
     serializedVersion: 2

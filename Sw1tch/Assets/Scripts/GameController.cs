@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("randomlyChangePlayer", 5.0f, 5.0f);
+        //InvokeRepeating("randomlyChangePlayer", 5.0f, 5.0f);
         liveCharacters.Add(circe);
         liveCharacters.Add(boe);
         liveCharacters.Add(trian);
