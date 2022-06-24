@@ -62,6 +62,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Alt"",
+                    ""type"": ""Button"",
+                    ""id"": ""23bc7ea8-ae07-4a6a-b112-38684b9c282a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""action"": ""StopFire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af99f5c0-7ee9-4672-90e7-8cb28ba04dcb"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Alt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_StopFire = m_Player.FindAction("StopFire", throwIfNotFound: true);
+        m_Player_Alt = m_Player.FindAction("Alt", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +248,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MousePosition;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_StopFire;
+    private readonly InputAction m_Player_Alt;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -235,6 +257,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @StopFire => m_Wrapper.m_Player_StopFire;
+        public InputAction @Alt => m_Wrapper.m_Player_Alt;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +279,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @StopFire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopFire;
                 @StopFire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopFire;
                 @StopFire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopFire;
+                @Alt.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAlt;
+                @Alt.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAlt;
+                @Alt.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAlt;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -272,6 +298,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @StopFire.started += instance.OnStopFire;
                 @StopFire.performed += instance.OnStopFire;
                 @StopFire.canceled += instance.OnStopFire;
+                @Alt.started += instance.OnAlt;
+                @Alt.performed += instance.OnAlt;
+                @Alt.canceled += instance.OnAlt;
             }
         }
     }
@@ -282,5 +311,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnStopFire(InputAction.CallbackContext context);
+        void OnAlt(InputAction.CallbackContext context);
     }
 }

@@ -10,6 +10,7 @@ TagManager:
   - Warp
   - WarpPoint
   - Connector
+  - Room
   layers:
   - Default
   - TransparentFX
@@ -44,11 +45,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 2906053977
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Walls
     uniqueID: 115449553

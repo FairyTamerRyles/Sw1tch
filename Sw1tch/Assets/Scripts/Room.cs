@@ -7,7 +7,13 @@ public class Room : MonoBehaviour
 {
     [SerializeField]
     private CinemachineVirtualCamera roomCamera;
+    [SerializeField]
+    private List<WarpPoint> warps;
 
+    public List<WarpPoint> Warps()
+    {
+        return warps;
+    }
 
     public CinemachineVirtualCamera RoomCamera()
     {
@@ -19,8 +25,6 @@ public class Room : MonoBehaviour
     //Contain a list of doors?
     //need a tag determining how to use the doors
     
-
-
 
     // Start is called before the first frame update
     void Start()

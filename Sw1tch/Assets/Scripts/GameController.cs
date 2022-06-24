@@ -21,14 +21,18 @@ public class GameController : MonoBehaviour
     private CameraController camController;
     [SerializeField]
     private bool paused = false;
+    private RoomRandomizer roomRandomizer;
 
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
         //InvokeRepeating("randomlyChangePlayer", 5.0f, 5.0f);
         liveCharacters.Add(circe);
         liveCharacters.Add(boe);
         liveCharacters.Add(trian);
+        roomRandomizer = new RoomRandomizer();
+        roomRandomizer.RandomizeRooms();
     }
 
     // Update is called once per frame

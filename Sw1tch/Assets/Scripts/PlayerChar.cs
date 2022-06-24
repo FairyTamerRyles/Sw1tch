@@ -27,6 +27,8 @@ public class PlayerChar : MonoBehaviour
     private Vector2 targetPos;
     [SerializeField]
     private bool switchingRooms;
+    [SerializeField]
+    private GameObject cursor;
 
     //private IAttack attack;
     //private IAlt alt;
@@ -66,6 +68,11 @@ public class PlayerChar : MonoBehaviour
     {
         if(switchingRooms)
         {
+            
+            //---This code is no longer neccessary, as the room switching has gone back to the original method thanks to the tilemaps for the sprites
+            //---However, it might not be completely arbitrary since it could be used to move to a starting location once the true switch room animation is put in
+
+
             if(Vector2.Distance(transform.position, targetPos) > 1f)
             {
                 transform.position = Vector2.MoveTowards(transform.position, targetPos, switchSpeed * Time.deltaTime);
@@ -93,9 +100,11 @@ public class PlayerChar : MonoBehaviour
         speedY = Mathf.Lerp(rb.velocity.y, speedY, lerpVar);
 
         rb.velocity = new Vector2(speedX, speedY);
+        Debug.Log("rb.velocity: " + rb.velocity);
         //For some reason, while this code is being executed, it does not however change the rotation if you do not actually move the mouse
         Vector2 mouseScreenPosition = playerInput.Player.MousePosition.ReadValue<Vector2>();
         mousePos = cam.ScreenToWorldPoint(mouseScreenPosition);
+        cursor.transform.position = mousePos;
         Vector2 lookDir = mousePos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90;
         reticle.transform.eulerAngles = new Vector3(0, 0, angle);

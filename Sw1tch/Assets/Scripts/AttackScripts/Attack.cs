@@ -26,6 +26,14 @@ public abstract class Attack : MonoBehaviour
     private bool isShooting;
     private bool shotOnce = false;
     private bool waitingForShot = false;
+    private bool canShoot = true;
+
+    /*[SerializeField]
+    private Alt alt;
+    
+    [SerializeField]
+    private Ult ult;
+    */
 
     #region GetSetters
     public GameObject Projectile
@@ -91,7 +99,7 @@ public abstract class Attack : MonoBehaviour
     {
         if(timer <= 0.1) //timer makes sure you are within firing timeframe
         {
-            if(isShooting) //checks if we are shooting right now, or if we shot, let go, but need to fire once
+            if(isShooting && canShoot) //checks if we are shooting right now, or if we shot, let go, but need to fire once
             {
                 Shoot(upgradeTag);
             }
@@ -104,7 +112,7 @@ public abstract class Attack : MonoBehaviour
     }
     void StartShoot()
     {
-        if(timer <= 0.12)
+        if(timer <= 0.12 && canShoot)
         {
             //timer = fireSpeed;
             Shoot(upgradeTag);
@@ -154,5 +162,10 @@ public abstract class Attack : MonoBehaviour
     void Attack_Spread()
     {
         Debug.LogWarning("Attack Spread on " + gameObject.name + " does not have an applicable override!");
+    }
+
+    public void SetCanShoot(bool value)
+    {
+        canShoot = value;
     }
 }
