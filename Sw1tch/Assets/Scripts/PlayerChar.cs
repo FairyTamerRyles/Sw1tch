@@ -100,7 +100,6 @@ public class PlayerChar : MonoBehaviour
         speedY = Mathf.Lerp(rb.velocity.y, speedY, lerpVar);
 
         rb.velocity = new Vector2(speedX, speedY);
-        Debug.Log("rb.velocity: " + rb.velocity);
         //For some reason, while this code is being executed, it does not however change the rotation if you do not actually move the mouse
         Vector2 mouseScreenPosition = playerInput.Player.MousePosition.ReadValue<Vector2>();
         mousePos = cam.ScreenToWorldPoint(mouseScreenPosition);
@@ -148,12 +147,9 @@ public class PlayerChar : MonoBehaviour
         x *= roomSwitchDistance;
         y *= roomSwitchDistance;
 
-        Debug.Log("Distances to add: " + x + "," + y);
 
         Vector2 currentPos = transform.position;
         targetPos = new Vector2(currentPos.x + x, currentPos.y + y);
-        Debug.Log(currentPos);
-        Debug.Log(targetPos);
 
         //change the camera
         newRoom.RoomCamera().Priority = 1;

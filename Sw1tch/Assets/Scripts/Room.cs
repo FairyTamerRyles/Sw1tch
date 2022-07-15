@@ -9,7 +9,14 @@ public class Room : MonoBehaviour
     private CinemachineVirtualCamera roomCamera;
     [SerializeField]
     private List<WarpPoint> warps;
+    [SerializeField]
+    private string spawnRoomOfCharacter;
 
+
+    public string SpawnRoomOfCharacter()
+    {
+        return spawnRoomOfCharacter;
+    }
     public List<WarpPoint> Warps()
     {
         return warps;

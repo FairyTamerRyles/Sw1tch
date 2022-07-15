@@ -10,19 +10,17 @@ public class RoomRandomizer
     private bool wantingWarpWillCloseRoom = false;
     private int loopCount = 0;
 
-    public void RandomizeRooms()
+    public void RandomizeRooms(List<Room> roomsToRandomize, string startingRoom)
     {
-        GameObject[] rooms = GameObject.FindGameObjectsWithTag("Room");
-        foreach (GameObject room in rooms)
+        allRooms = roomsToRandomize;
+        foreach (Room room in allRooms)
         {
             //this isn't how things will work but I need to test. FIX LATER
-            if(room.name != "Branch1Start")
+            if(room.gameObject.name != startingRoom)
             {
-                room.SetActive(false);
+                room.gameObject.SetActive(false);
             }
-            Room r = room.GetComponent<Room>();
-            allRooms.Add(r);
-            foreach (WarpPoint w in r.Warps())
+            foreach (WarpPoint w in room.Warps())
             {
                 availableWarps.Add(w);
             }

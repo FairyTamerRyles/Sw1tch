@@ -11,28 +11,74 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject boe;
     [SerializeField]
-    private GameObject trian;
+    private GameObject triane;
 
     [SerializeField]
     private GameObject currentPlayer;
     public List<GameObject> liveCharacters;
 
     [SerializeField]
-    private CameraController camController;
-    [SerializeField]
     private bool paused = false;
     private RoomRandomizer roomRandomizer;
+    [SerializeField]
+    private List<GameObject> rooms;
+
+
+    public void Awake()
+    {
+        
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
+        List<Room> roomsForRandomizing = new List<Room>();
+        string startingRoom = "";
+        foreach(GameObject r in rooms)
+        {
+            GameObject rInstance = Instantiate(r, new Vector3(0, 0, 0), Quaternion.identity);
+            Room rRoom = rInstance.GetComponent<Room>();
+            roomsForRandomizing.Add(rRoom);
+
+            if(currentPlayer.name != rRoom.SpawnRoomOfCharacter())
+            {
+                CameraController.Instance.SetCameraPriority(rRoom.RoomCamera(), 0);
+            }
+            else
+            {
+                CameraController.Instance.SetCameraPriority(rRoom.RoomCamera(), 1);
+                startingRoom = rInstance.name;
+            }
+            if(rRoom.SpawnRoomOfCharacter() == "Boe")
+            {
+                CameraController.Instance.SetCameraTarget(rRoom.RoomCamera(), boe);
+                boe.transform.parent = rInstance.transform;
+            }
+            else if(rRoom.SpawnRoomOfCharacter() == "Triane")
+            {
+                CameraController.Instance.SetCameraTarget(rRoom.RoomCamera(), triane);
+                triane.transform.parent = rInstance.transform;
+            }
+            else if(rRoom.SpawnRoomOfCharacter() == "Circe")
+            {
+                CameraController.Instance.SetCameraTarget(rRoom.RoomCamera(), circe);
+                circe.transform.parent = rInstance.transform;
+            }
+            else
+            {
+                CameraController.Instance.SetCameraTarget(rRoom.RoomCamera(), currentPlayer);
+            }
+        }
+
+
+
+        //Cursor.visible = false;
         //InvokeRepeating("randomlyChangePlayer", 5.0f, 5.0f);
         liveCharacters.Add(circe);
         liveCharacters.Add(boe);
-        liveCharacters.Add(trian);
+        liveCharacters.Add(triane);
         roomRandomizer = new RoomRandomizer();
-        roomRandomizer.RandomizeRooms();
+        roomRandomizer.RandomizeRooms(roomsForRandomizing, startingRoom);
     }
 
     // Update is called once per frame
@@ -80,10 +126,10 @@ public class GameController : MonoBehaviour
                         projectile.SetActive(false);
                     }
                 }
-                else if(currentPlayer == trian)
+                else if(currentPlayer == triane)
                 {
-                    GameObject[] trianProjectiles = GameObject.FindGameObjectsWithTag("Triane");
-                    foreach(GameObject projectile in trianProjectiles)
+                    GameObject[] trianeProjectiles = GameObject.FindGameObjectsWithTag("Triane");
+                    foreach(GameObject projectile in trianeProjectiles)
                     {
                         projectile.SetActive(false);
                     }
@@ -97,7 +143,7 @@ public class GameController : MonoBehaviour
                         projectile.SetActive(true);
                     }
                     circe.GetComponent<PlayerChar>().switchOdds = 1;
-                    trian.GetComponent<PlayerChar>().switchOdds++;
+                    triane.GetComponent<PlayerChar>().switchOdds++;
                     boe.GetComponent<PlayerChar>().switchOdds++;
                 }
                 else if(newCurrentPlayer == boe)
@@ -108,18 +154,18 @@ public class GameController : MonoBehaviour
                         projectile.SetActive(true);
                     }
                     circe.GetComponent<PlayerChar>().switchOdds++;
-                    trian.GetComponent<PlayerChar>().switchOdds++;
+                    triane.GetComponent<PlayerChar>().switchOdds++;
                     boe.GetComponent<PlayerChar>().switchOdds = 1;
                 }
-                else if(newCurrentPlayer == trian)
+                else if(newCurrentPlayer == triane)
                 {
-                    GameObject[] trianProjectiles = GameObject.FindGameObjectsWithTag("Triane");
-                    foreach(GameObject projectile in trianProjectiles)
+                    GameObject[] trianeProjectiles = GameObject.FindGameObjectsWithTag("Triane");
+                    foreach(GameObject projectile in trianeProjectiles)
                     {
                         projectile.SetActive(true);
                     }
                     circe.GetComponent<PlayerChar>().switchOdds++;
-                    trian.GetComponent<PlayerChar>().switchOdds = 1;
+                    triane.GetComponent<PlayerChar>().switchOdds = 1;
                     boe.GetComponent<PlayerChar>().switchOdds++;
                 }
                 CameraController.Instance.SwitchCameraTarget(newCurrentPlayer, currentPlayer.transform.parent.GetComponent<Room>());

@@ -35,6 +35,15 @@ public class CameraController : MonoBehaviour
             }
         }
     }
+    public void SetCameraPriority(CinemachineVirtualCamera cam, int newPriority)
+    {
+        cam.Priority = newPriority;
+    }
+    public void SetCameraTarget(CinemachineVirtualCamera cam, GameObject newTarget)
+    {
+        //this will probably need more work than I am doing here
+        cam.Follow = newTarget.transform;
+    }
     // Start is called before the first frame update
     void Start()
     {
