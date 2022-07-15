@@ -8,8 +8,9 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb;
     public float lifeTime;
-    [SerializeField]
-    private bool damaging = false;
+    //[SerializeField]
+    //private bool damaging = false;
+    private int damage = 10;
 
     private float timer = 0;
 
@@ -29,6 +30,10 @@ public class Projectile : MonoBehaviour
                 collision.gameObject.GetComponent<IDamageable>().takeDamage(damage);
             }
             //Instantiate(hitEffect, transform.position, Quaternion.identity);*/
+            if(collision.gameObject.GetComponent<Enemy>() != null)
+            {
+                collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+            }
             Despawn();
         }
     }
