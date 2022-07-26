@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using Pathfinding;
 
 public class GameController : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class GameController : MonoBehaviour
     private RoomRandomizer roomRandomizer;
     [SerializeField]
     private List<GameObject> rooms;
+    [SerializeField]
+    private AStarController aStarController;
 
 
     public void Awake()
@@ -68,6 +71,8 @@ public class GameController : MonoBehaviour
             {
                 CameraController.Instance.SetCameraTarget(rRoom.RoomCamera(), currentPlayer);
             }
+            AstarPath.FindAstarPath();
+            AstarPath.active.Scan();
         }
 
 
@@ -79,6 +84,7 @@ public class GameController : MonoBehaviour
         liveCharacters.Add(triane);
         roomRandomizer = new RoomRandomizer();
         roomRandomizer.RandomizeRooms(roomsForRandomizing, startingRoom);
+        
     }
 
     // Update is called once per frame
