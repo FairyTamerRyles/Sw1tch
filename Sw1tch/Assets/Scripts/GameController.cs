@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
         string startingRoom = "";
         foreach(GameObject r in rooms)
         {
-            GameObject rInstance = Instantiate(r, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject rInstance = Instantiate(r, new Vector3(0, 0.5f, 0), Quaternion.identity);
             Room rRoom = rInstance.GetComponent<Room>();
             roomsForRandomizing.Add(rRoom);
 

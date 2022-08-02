@@ -11,6 +11,13 @@ public class Room : MonoBehaviour
     private List<WarpPoint> warps;
     [SerializeField]
     private string spawnRoomOfCharacter;
+    [SerializeField]
+    private CompositeCollider2D inBoundsCol;
+
+    public CompositeCollider2D InBoundsCol()
+    {
+        return inBoundsCol;
+    }
 
 
     public string SpawnRoomOfCharacter()
