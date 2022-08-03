@@ -32,8 +32,10 @@ public class EnemyAI : MonoBehaviour
 
     void UpdatePath()
     {
+        Debug.Log("Updating path");
         if(seeker.IsDone())
         {
+            Debug.Log("seeker is done");
             if(transform.parent != null)
             {
                 if(transform.parent.GetComponent<Room>() != null)
@@ -41,16 +43,20 @@ public class EnemyAI : MonoBehaviour
                     CompositeCollider2D inBounds = transform.parent.GetComponent<Room>().InBoundsCol();
                     bool pointFound = false;
                     Vector3 randomPosition = new Vector3(0,0,0);
-                    while(!pointFound)
+                    
+                    randomPosition.x = Random.Range(transform.position.x - moveRadius, transform.position.x + moveRadius);
+                    randomPosition.y = Random.Range(transform.position.y - moveRadius, transform.position.y + moveRadius);
+                    movementPointer.position = randomPosition;
+                    if(inBounds.bounds.Contains(movementPointer.position))
                     {
-                        randomPosition.x = Random.Range(transform.position.x - moveRadius, transform.position.x + moveRadius);
-                        randomPosition.y = Random.Range(transform.position.y - moveRadius, transform.position.y + moveRadius);
-                        movementPointer.position = randomPosition;
-                        if(inBounds.bounds.Contains(movementPointer.position))
-                        {
-                            pointFound = true;
-                        }
+                        Debug.Log("movement pointer good");
                     }
+                    else
+                    {
+                        Debug.Log("thingy broken");
+                        movementPointer.position = transform.position;
+                    }
+                    
                     seeker.StartPath(rb.position, movementPointer.position, OnPathComplete);
                 }
             }
