@@ -126,6 +126,7 @@ public class PlayerChar : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        Debug.Log("EnteredTrigger");
         if(col.gameObject.tag == "Connector" && !switchingRooms)
         {
             Connector c = col.gameObject.GetComponent<Connector>();

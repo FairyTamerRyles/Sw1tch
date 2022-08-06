@@ -8,18 +8,18 @@ public class EnemyAI : MonoBehaviour
     public float speed = 20f;
     public float nextWaypointDistance = 3f;
 
-    Path path;
-    int currentWaypoint = 0;
-    bool reachedPathEnd = false;
+    public Path path;
+    public int currentWaypoint = 0;
+    public bool reachedPathEnd = false;
 
     [SerializeField]
-    float moveRadius = 5f;
+    public float moveRadius = 5f;
     [SerializeField]
-    private Transform movementPointer;
+    public Transform movementPointer;
 
 
-    Seeker seeker;
-    Rigidbody2D rb;
+    public Seeker seeker;
+    public Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -32,10 +32,8 @@ public class EnemyAI : MonoBehaviour
 
     void UpdatePath()
     {
-        Debug.Log("Updating path");
         if(seeker.IsDone())
         {
-            Debug.Log("seeker is done");
             if(transform.parent != null)
             {
                 if(transform.parent.GetComponent<Room>() != null)
@@ -63,7 +61,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void OnPathComplete(Path p)
+    public void OnPathComplete(Path p)
     {
         path = p;
         currentWaypoint = 0;
