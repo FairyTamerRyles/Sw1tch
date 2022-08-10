@@ -93,7 +93,7 @@ public class GameController : MonoBehaviour
         
     }
 
-    public GameObject getCurrentPlayer()
+    public GameObject GetCurrentPlayer()
     {
         return currentPlayer;
     }

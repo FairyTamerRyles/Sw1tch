@@ -5,7 +5,7 @@ using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {
-    public float speed = 20f;
+    public float speed = 100000f;
     public float nextWaypointDistance = 3f;
 
     public Path path;
@@ -27,7 +27,7 @@ public class EnemyAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
-        InvokeRepeating("UpdatePath", 0f, 5f);
+        InvokeRepeating("UpdatePath", 0f, 2f);
     }
 
     void UpdatePath()
@@ -47,11 +47,11 @@ public class EnemyAI : MonoBehaviour
                     movementPointer.position = randomPosition;
                     if(inBounds.bounds.Contains(movementPointer.position))
                     {
-                        Debug.Log("movement pointer good");
+                        //Debug.Log("movement pointer good");
                     }
                     else
                     {
-                        Debug.Log("thingy broken");
+                        //Debug.Log("thingy broken");
                         movementPointer.position = transform.position;
                     }
                     
@@ -71,7 +71,9 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        
         if (path == null)
+            //Debug.Log("Calling UFixed");
             return;
 
         if(currentWaypoint >= path.vectorPath.Count)
@@ -94,5 +96,12 @@ public class EnemyAI : MonoBehaviour
         {
             currentWaypoint++;
         }
+        Invoke("PersonalFixedUpdates", 0f);
+    }
+
+    public virtual void PersonalFixedUpdates()
+    {
+        //this is a function meant to be overloaded. If not, then the enemy has nothing that needs to be done in fixedupdate
+        Debug.Log("Bad Call");
     }
 }

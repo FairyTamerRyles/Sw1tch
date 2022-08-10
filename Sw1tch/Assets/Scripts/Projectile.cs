@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
     public float lifeTime;
     //[SerializeField]
     //private bool damaging = false;
+    [SerializeField]
     private int damage = 10;
 
     private float timer = 0;

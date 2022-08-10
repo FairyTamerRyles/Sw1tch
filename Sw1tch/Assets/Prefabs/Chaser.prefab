@@ -125,8 +125,9 @@ GameObject:
   - component: {fileID: 8435612499564176316}
   - component: {fileID: 4395085832016362663}
   - component: {fileID: 5160787561753762882}
-  - component: {fileID: 2262852961118093093}
-  m_Layer: 0
+  - component: {fileID: -6655536623046582496}
+  - component: {fileID: 428328037447205157}
+  m_Layer: 7
   m_Name: Chaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +245,7 @@ PolygonCollider2D:
       - {x: -0.004170835, y: -0.25835025}
       - {x: 0.2818581, y: -0.107740164}
       - {x: 0.5133467, y: -0.0016155839}
---- !u!114 &2262852961118093093
+--- !u!114 &-6655536623046582496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -253,7 +254,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7988433793600806010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aa422bbd9547e543b7e1e29b44882d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 846604a4f2b6af443a53a9da6b9de656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100000
@@ -264,3 +265,22 @@ MonoBehaviour:
   movementPointer: {fileID: 6235878179747880252}
   seeker: {fileID: 5196484579219383492}
   rb: {fileID: 8435612499564176316}
+  chaseDistance: 5
+  players:
+    serializedVersion: 2
+    m_Bits: 8
+  chaseSpeed: 4000000
+--- !u!114 &428328037447205157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7988433793600806010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3556aef821c07e943ae2d8cdc3bc5b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  aiPath: {fileID: 0}

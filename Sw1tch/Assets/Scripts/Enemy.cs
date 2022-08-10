@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("Taking Fire");
         health -= damage;
         if(health <= 0)
         {
