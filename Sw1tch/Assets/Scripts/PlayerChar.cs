@@ -29,6 +29,10 @@ public class PlayerChar : MonoBehaviour
     private bool switchingRooms;
     [SerializeField]
     private GameObject cursor;
+    [SerializeField]
+    private bool dead = false;
+    [SerializeField]
+    private GameObject deathParticles;
 
     //private IAttack attack;
     //private IAlt alt;
@@ -165,6 +169,14 @@ public class PlayerChar : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("I Have died");
+        dead = true;
+        Reset();
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
+        gameObject.SetActive(false);
+    }
+
+    private void Reset()
+    {
+
     }
 }
