@@ -103,7 +103,7 @@ public class PlayerChar : MonoBehaviour
         //For some reason, while this code is being executed, it does not however change the rotation if you do not actually move the mouse
         Vector2 mouseScreenPosition = playerInput.Player.MousePosition.ReadValue<Vector2>();
         mousePos = cam.ScreenToWorldPoint(mouseScreenPosition);
-        cursor.transform.position = mousePos;
+        //cursor.transform.position = mousePos;
         Vector2 lookDir = mousePos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90;
         reticle.transform.eulerAngles = new Vector3(0, 0, angle);
@@ -121,6 +121,10 @@ public class PlayerChar : MonoBehaviour
         {
             //play room change animation
             GameObject.Find("GameController").GetComponent<GameController>().changeRooms(col.gameObject.GetComponent<WarpPoint>().AdjWarp().ParentRoom(), col.gameObject.GetComponent<WarpPoint>().AdjWarp().SpawnPoint());
+        }
+        else if(col.gameObject.tag == "KillHazard")
+        {
+            Die();
         }
     }
 
@@ -157,5 +161,10 @@ public class PlayerChar : MonoBehaviour
         previousRoom.RoomCamera().Priority = 0;
 
         //play the enter room animations, which will unpause the swapping
+    }
+
+    private void Die()
+    {
+        Debug.Log("I Have died");
     }
 }
