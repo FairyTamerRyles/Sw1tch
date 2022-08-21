@@ -6,9 +6,7 @@ using Pathfinding;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private int health;
-    [SerializeField]
-    private AIPath aiPath;
+    protected int health;
 
 
     // Start is called before the first frame update

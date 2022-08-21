@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class EnemyAI : MonoBehaviour
+public class Enemy_Random : MonoBehaviour
 {
-    public float speed = 100000f;
-    public float nextWaypointDistance = 3f;
+    //Movement variables
+    private float speed = 100000f;
+    private Rigidbody2D rb;
 
+    //Pathfinding Specific variables    
+    public float nextWaypointDistance = 3f;
     public Path path;
     public int currentWaypoint = 0;
     public bool reachedPathEnd = false;
+    public Seeker seeker;
 
+
+    //Random movment variables
     [SerializeField]
     public float moveRadius = 5f;
     [SerializeField]
     public Transform movementPointer;
 
 
-    public Seeker seeker;
-    public Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +77,6 @@ public class EnemyAI : MonoBehaviour
     {
         
         if (path == null)
-            //Debug.Log("Calling UFixed");
             return;
 
         if(currentWaypoint >= path.vectorPath.Count)
